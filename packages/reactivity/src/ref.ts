@@ -6,7 +6,6 @@ import { ComputedRef } from './computed'
 import { CollectionTypes } from './collectionHandlers'
 
 export interface Ref<T = any> {
-  _isRef: true
   value: UnwrapRef<T>
 }
 
@@ -69,7 +68,7 @@ function toProxyRef<T extends object, K extends keyof T>(
     set value(newVal) {
       object[key] = newVal
     }
-  }
+  } as Ref
 }
 
 type UnwrapArray<T> = { [P in keyof T]: UnwrapRef<T[P]> }
